@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090b">
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>SAEKO® — Coming Soon</title>
+  <meta name="description" content="SAEKO prépare une nouvelle expérience. Le développement est actuellement à 45 %.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #08090b;
+      --white: #f5f5f7;
+      --muted: #85868f;
+      --accent: #a5a8ff;
+      --line: rgba(255,255,255,.09);
+    }
+
+    html {
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* BACKGROUND */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .15;
+      animation: float 14s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .orb.one {
+      width: 550px;
+      height: 550px;
+      background: #5658d9;
+      top: -320px;
+      left: 8%;
+    }
+
+    .orb.two {
+      width: 550px;
+      height: 550px;
+      background: #633ca5;
+      bottom: -370px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    .orb.three {
+      width: 300px;
+      height: 300px;
+      background: #304b83;
+      top: 35%;
+      left: 65%;
+      animation-delay: -8s;
+    }
+
+    @keyframes float {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(80px,60px) scale(1.25); }
+    }
+
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      opacity: .12;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 65px 65px;
+      mask-image: radial-gradient(
+        ellipse at center, black, transparent 76%
+      );
+    }
+
+    .ambient-light {
+      position: absolute;
+      width: 650px;
+      height: 300px;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(91,91,210,.045);
+      filter: blur(100px);
+    }
+
+    /* PAGE */
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1440px;
+      height: 100vh;
+      height: 100svh;
+      min-height: 0;
+      margin: auto;
+      padding: 25px 7%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+
+    header {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      display: block;
+      width: 145px;
+      max-height: 55px;
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #a5a5ac;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      position: relative;
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      background: #a5a8ff;
+      border-radius: 50%;
+      box-shadow: 0 0 14px #8588ff;
+    }
+
+    .status-dot::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1px solid #a5a8ff;
+      border-radius: 50%;
+      animation: ripple 2s ease-out infinite;
+    }
+
+    @keyframes ripple {
+      0% { transform: scale(.5); opacity: .8; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    /* MAIN */
+
+    main {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 18px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 550;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      animation: reveal .9s .1s both;
+    }
+
+    .eyebrow-line {
+      width: 22px;
+      height: 1px;
+      background: var(--accent);
+      opacity: .7;
+    }
+
+    h1 {
+      font-size: clamp(50px, 7.5vw, 100px);
+      font-weight: 650;
+      line-height: 1.02;
+      letter-spacing: -.065em;
+      animation: reveal 1s .25s both;
+    }
+
+    h1 .gradient {
+      display: block;
+      padding-bottom: .08em;
+      background: linear-gradient(
+        105deg,
+        #ffffff 5%,
+        #c1c2ff 38%,
+        #8587f2 68%,
+        #ffffff 100%
+      );
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shine 7s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    .description {
+      max-width: 510px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+      font-weight: 400;
+      animation: reveal 1s .45s both;
+    }
+
+    .description strong {
+      color: #c9c9d1;
+      font-weight: 500;
+    }
+
+    /* PROGRESS CARD */
+
+    .progress-card {
+      width: min(390px, 100%);
+      margin-top: 32px;
+      padding: 20px 24px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      text-align: left;
+      animation: reveal 1s .65s both;
+    }
+
+    .progress-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+
+    .progress-label {
+      color: #c0c0c9;
+      font-size: 10px;
+      font-weight: 550;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .progress-percentage {
+      color: white;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,.09);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 45%;
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(
+        90deg, #7779db, #a5a8ff, #ffffff
+      );
+      box-shadow: 0 0 13px rgba(165,168,255,.6);
+      transform-origin: left;
+      animation: progress-appear 1.8s .9s both;
+    }
+
+    @keyframes progress-appear {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .progress-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+      color: #777984;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .progress-footer span:last-child {
+      color: #aaaaff;
+    }
+
+    /* BOTTOM TEXT */
+
+    .bottom-message {
+      margin-top: 19px;
+      color: #777984;
+      font-size: 10px;
+      letter-spacing: .5px;
+      animation: reveal 1s .85s both;
+    }
+
+    .bottom-message span {
+      color: #b3b4ff;
+    }
+
+    /* FOOTER */
+
+    footer {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      color: #686972;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      animation: reveal 1s 1s both;
+    }
+
+    .footer-right {
+      color: #999aa4;
+      text-align: right;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* LAPTOPS AND SHORT SCREENS */
+
+    @media (max-height: 800px) and (min-width: 601px) {
+      .page {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      main {
+        padding: 12px 0;
+      }
+
+      .eyebrow {
+        margin-bottom: 19px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 6vw, 76px);
+      }
+
+      .description {
+        margin-top: 15px;
+        line-height: 1.7;
+      }
+
+      .progress-card {
+        margin-top: 23px;
+        padding: 16px 22px;
+      }
+
+      .bottom-message {
+        margin-top: 13px;
+      }
+
+      footer {
+        padding-top: 13px;
+      }
+    }
+
+    /* TABLET */
+
+    @media (max-width: 900px) {
+      .page {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      h1 {
+        font-size: clamp(52px, 9vw, 78px);
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+      .page {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 22px 22px;
+      }
+
+      .logo {
+        width: 112px;
+        max-height: 42px;
+      }
+
+      .status {
+        font-size: 8px;
+        letter-spacing: .9px;
+        gap: 9px;
+      }
+
+      main {
+        flex: 1;
+        padding: 35px 0;
+      }
+
+      .eyebrow {
+        font-size: 8px;
+        letter-spacing: 2.5px;
+        margin-bottom: 23px;
+        gap: 8px;
+      }
+
+      .eyebrow-line {
+        width: 14px;
+      }
+
+      h1 {
+        font-size: clamp(43px, 10.8vw, 64px);
+        letter-spacing: -.06em;
+        line-height: 1.05;
+      }
+
+      .description {
+        max-width: 355px;
+        font-size: 13px;
+        line-height: 1.85;
+        margin-top: 19px;
+      }
+
+      .progress-card {
+        margin-top: 27px;
+        padding: 18px;
+      }
+
+      .progress-percentage {
+        font-size: 22px;
+      }
+
+      .bottom-message {
+        font-size: 9px;
+        line-height: 1.7;
+        max-width: 290px;
+        margin-top: 18px;
+      }
+
+      footer {
+        font-size: 8px;
+        letter-spacing: .6px;
+      }
+
+      .orb.one {
+        width: 350px;
+        height: 350px;
+        top: -220px;
+        left: -100px;
+      }
+
+      .orb.two {
+        width: 350px;
+        height: 350px;
+        bottom: -250px;
+        right: -150px;
+      }
+
+      .orb.three {
+        width: 200px;
+        height: 200px;
+        left: 60%;
+      }
+    }
+
+    /* EXTRA SMALL PHONES */
+
+    @media (max-width: 360px) {
+      .page {
+        padding: 18px 17px;
+      }
+
+      .logo {
+        width: 95px;
+      }
+
+      .status {
+        font-size: 7px;
+      }
+
+      h1 {
+        font-size: 41px;
+      }
+
+      .description {
+        font-size: 12px;
+      }
+
+      .progress-card {
+        padding: 17px;
+        margin-top: 22px;
+      }
+
+      footer {
+        font-size: 7px;
+      }
+    }
+
+    /* REDUCED MOTION */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+    <div class="grid-bg"></div>
+    <div class="ambient-light"></div>
+  </div>
+
+  <div class="page">
+
+    <header>
+      <img
+        src="./logo.png"
+        alt="SAEKO"
+        class="logo"
+        width="145"
+      >
+
+      <div class="status">
+        <span class="status-dot"></span>
+        &nbsp;Développement en cours
+      </div>
+    </header>
+
+    <main>
+
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        A new experience is coming
+        <span class="eyebrow-line"></span>
+      </div>
+
+      <h1>
+        Nous préparons
+        <span class="gradient">quelque chose.</span>
+      </h1>
+
+      <p class="description">
+        Une nouvelle vision. De nouvelles expériences.
+        Un studio qui évolue.<br><br>
+        Nous travaillons actuellement en coulisses
+        pour vous dévoiler notre prochain chapitre.
+        <strong>L'attente en vaudra la peine.</strong>
+      </p>
+
+      <section
+        class="progress-card"
+        aria-label="Progression du développement : 45 %"
+      >
+
+        <div class="progress-heading">
+          <span class="progress-label">
+            Progression du développement
+          </span>
+
+          <span class="progress-percentage">45%</span>
+        </div>
+
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-valuenow="45"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Développement"
+        >
+          <div class="progress-bar"></div>
+        </div>
+
+        <div class="progress-footer">
+          <span>EN COURS DE CONSTRUCTION</span>
+          <span>45 / 100</span>
+        </div>
+
+      </section>
+
+      <p class="bottom-message">
+        Nous construisons la suite.
+        <span>Restez à l'écoute.</span>
+      </p>
+
+    </main>
+
+    <footer>
+      <span>© 2026 SAEKO®</span>
+      <span class="footer-right">
+        DESIGNED FOR WHAT'S NEXT.
+      </span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
